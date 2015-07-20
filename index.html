@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="poi : Scalable KanColle browser and tool.">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>poi</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/yudachi/poi">View on GitHub</a>
+
+          <h1 id="project_title">poi</h1>
+          <h2 id="project_tagline">Scalable KanColle browser and tool.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/yudachi/poi/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/yudachi/poi/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="https://raw.githubusercontent.com/yudachi/poi/master/assets/img/header.png" alt="Header"></p>
+
+<p><a href="https://travis-ci.org/yudachi/poi"><img src="https://travis-ci.org/yudachi/poi.svg?branch=master" alt="Build Status"></a>
+<a href="https://ci.appveyor.com/project/magica/poi"><img src="https://ci.appveyor.com/api/projects/status/bpa1dvvjt33xxx5n?svg=true" alt="Build status"></a>
+<a href="https://david-dm.org/yudachi/poi"><img src="https://david-dm.org/yudachi/poi.svg" alt="Dependencies"></a>
+<a href="https://david-dm.org/yudachi/poi#info=devDependencies"><img src="https://david-dm.org/yudachi/poi/dev-status.svg" alt="DevDependencies"></a></p>
+
+<p>Scalable KanColle browser and tool.</p>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Proxy</li>
+<li>Cache</li>
+<li>Analysis</li>
+<li>Notification</li>
+<li>Plugin Support</li>
+</ul>
+
+<h2>
+<a id="run" class="anchor" href="#run" aria-hidden="true"><span class="octicon octicon-link"></span></a>Run</h2>
+
+<p>First, get the latest version of <a href="https://github.com/atom/electron">Electron</a> and <a href="https://iojs.org">io.js</a>.</p>
+
+<div class="highlight highlight-bash"><pre>git clone https://github.com/yudachi/poi
+<span class="pl-c1">cd</span> poi
+git submodule init
+git submodule update
+npm install
+./node_modules/.bin/bower install
+./node_modules/.bin/gulp
+cp default-config.cson config.cson
+/path/to/electron ./</pre></div>
+
+<h2>
+<a id="available-plugins" class="anchor" href="#available-plugins" aria-hidden="true"><span class="octicon octicon-link"></span></a>Available Plugins</h2>
+
+<p><a href="https://github.com/yudachi/plugin-prophet">plugin-prophet (Bundled)</a> by <a href="https://github.com/Chibaheit">Chiba</a></p>
+
+<blockquote>
+<p>Show the result of battle.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-exp-calculator">plugin-exp-calculator (Bundled)</a> by <a href="https://github.com/Chibaheit">Chiba</a></p>
+
+<blockquote>
+<p>Calculate experience value.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-map-hp">plugin-map-hp (Bundled)</a> by <a href="https://github.com/Chibaheit">Chiba</a></p>
+
+<blockquote>
+<p>a plugin map hp for poi.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-report">plugin-report (Bundled)</a> by <a href="https://github.com/magicae">Magica</a></p>
+
+<blockquote>
+<p>Report ship creating info and drop info, and so on.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-expedition">plugin-expedition (Bundled)</a> by <a href="https://github.com/malichan">Malichan</a></p>
+
+<blockquote>
+<p>Show expedition info.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-quest">plugin-quest (Bundled)</a> by <a href="https://github.com/malichan">Malichan</a></p>
+
+<blockquote>
+<p>Show quest info.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-item-improvement">plugin-item-improvement (Bundled)</a> by <a href="https://github.com/KochiyaOcean">KochiyaOcean</a></p>
+
+<blockquote>
+<p>Show improvable items of the day.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-ship-info">plugin-ship-info (Bundled)</a> by <a href="https://github.com/myzwillmake">Yunze</a></p>
+
+<blockquote>
+<p>Show detailed information of all owned ships.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-item-info">plugin-item-info (Bundled)</a> by <a href="https://github.com/myzwillmake">Yunze</a></p>
+
+<blockquote>
+<p>Show information of all owned items.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-new-window">plugin-new-window (Bundled)</a> by <a href="https://github.com/KochiyaOcean">KochiyaOcean</a></p>
+
+<blockquote>
+<p>Open a external browser window.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-Akashic-records">plugin-Akashic-records (Bundled)</a> by <a href="https://github.com/JenningsWu">JenningsWu</a></p>
+
+<blockquote>
+<p>Logbook plugin for poi.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-almanac">plugin-almanac</a> by <a href="https://github.com/magicae">Magica</a></p>
+
+<blockquote>
+<p>KanColle almanac from <a href="http://sandbox.runjs.cn/show/x9ou86rn">http://sandbox.runjs.cn/show/x9ou86rn</a></p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-sunshine">plugin-sunshine</a> by <a href="https://github.com/JenningsWu">JenningsWu</a></p>
+
+<blockquote>
+<p>poi~ shine you one face!</p>
+</blockquote>
+
+<p><a href="https://github.com/Ayaphis/plugin-repair">plugin-repair</a> by <a href="https://github.com/Ayaphis">Ayaphis</a></p>
+
+<blockquote>
+<p>Calculate the time required of repair.</p>
+</blockquote>
+
+<p><a href="https://github.com/yudachi/plugin-ship-panel-patcher">plugin-ship-panel-patcher</a> by <a href="https://github.com/KochiyaOcean">KochiyaOcean</a></p>
+
+<blockquote>
+<p>Use an alter style of ship panel.</p>
+</blockquote>
+
+<p><a href="https://github.com/dazzyd/poi-secretary">plugin-secretary</a> by <a href="https://github.com/dazzyd">Dazzy Ding</a></p>
+
+<blockquote>
+<p>Use secretary voice as notification sound.</p>
+</blockquote>
+
+<h2>
+<a id="guides-for-developers" class="anchor" href="#guides-for-developers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Guides for developers</h2>
+
+<p>About plugin, read the <a href="https://github.com/yudachi/poi/tree/master/docs">docs</a>.</p>
+
+<h2>
+<a id="based-on" class="anchor" href="#based-on" aria-hidden="true"><span class="octicon octicon-link"></span></a>Based on</h2>
+
+<ul>
+<li><a href="https://github.com/atom/electron">Electron</a></li>
+<li><a href="https://github.com/facebook/react">React</a></li>
+<li><a href="https://github.com/react-bootstrap/react-bootstrap/">ReactBootstrap</a></li>
+<li><a href="https://github.com/shadowsocks/shadowsocks">Shadowsocks</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="https://github.com/yudachi/poi/blob/master/LICENSE">The MIT License</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">poi maintained by <a href="https://github.com/yudachi">yudachi</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
