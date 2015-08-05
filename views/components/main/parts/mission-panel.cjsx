@@ -158,12 +158,14 @@ MissionPanel = React.createClass
                     else
                       trigger = []
                     <OverlayTrigger trigger={trigger} placement='right' overlay={<Tooltip><strong>归港时间: </strong>{timeToString @state.decks[i].completeTime}</Tooltip>}>
-                      <CountdownLabel
-                        deckIndex={i}
-                        completeTime={@state.decks[i].completeTime}
-                        notified={@state.notified}
-                        deckName={@state.decks[i].name}
-                        setNotifiedHandler={@setNotifiedHandler}/>
+                      <div>
+                        <CountdownLabel
+                          deckIndex={i}
+                          completeTime={@state.decks[i].completeTime}
+                          notified={@state.notified}
+                          deckName={@state.decks[i].name}
+                          setNotifiedHandler={@setNotifiedHandler}/>
+                      </div>
                     </OverlayTrigger>
                   }
                 </td>

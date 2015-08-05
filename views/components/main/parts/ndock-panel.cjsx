@@ -7,28 +7,71 @@ timeToString = (dateTime) ->
   date = new Date(dateTime)
   "#{date.getHours()}:#{date.getMinutes()}:#{date.getSeconds()}"
 
+CountdownLabel = React.createClass
+  getInitialState: ->
+    countdown: -1
+
+  updateCountdown: ->
+    {countdown} = @state
+    if countdown > 0
+      countdown = Math.max 0, Math.floor((@props.completeTime - new Date()) / 1000)
+      if countdown <= 60 && !@props.notified
+        notify "#{docks[i].name} 修复完成",
+          type: 'repair'
+          icon: join(ROOT, 'assets', 'img', 'operation', 'repair.png')
+        @props.setNotifiedHandler @props.deckIndex, true
+      else
+        @setState
+          countdown: countdown
+  componentDidMount: ->
+    setInterval @updateCountdown, 1000
+  componentWillUnmount: ->
+    clearInterval @updateCountdown, 1000
+  componentWillMount: ->
+    if @props.completeTime >= 0
+      countdown = Math.max 0, Math.floor((@props.completeTime - new Date()) / 1000)
+      @setState
+        countdown: countdown
+    else
+      @setState
+        countdown: -1
+  componentWillReceiveProps: (nextProps)->
+    if nextProps.completeTime >= 0
+      countdown = Math.max 0, Math.floor((nextProps.completeTime - new Date()) / 1000)
+      @setState
+        countdown: countdown
+    else
+      @setState
+        countdown: -1
+  render: ->
+    <div>
+      {
+        if @state.countdown > 60
+          <Label bsStyle="primary">{resolveTime @state.countdown}</Label>
+        else if @state.countdown >= 0
+          <Label bsStyle="success">{resolveTime @state.countdown}</Label>
+        else
+          <Label bsStyle="default"></Label>
+      }
+    </div>
+
 NdockPanel = React.createClass
   getInitialState: ->
     docks: [
         name: '未使用'
         completeTime: -1
-        countdown: -1
       ,
         name: '未使用'
         completeTime: -1
-        countdown: -1
       ,
         name: '未使用'
         completeTime: -1
-        countdown: -1
       ,
         name: '未使用'
         completeTime: -1
-        countdown: -1
       ,
         name: '未使用'
         completeTime: -1
-        countdown: -1
     ]
     notified: []
   handleResponse: (e) ->
@@ -44,18 +87,15 @@ NdockPanel = React.createClass
               docks[id] =
                 name: '未解锁'
                 completeTime: -1
-                countdown: -1
             when 0
               docks[id] =
                 name: '未使用'
                 completeTime: -1
-                countdown: -1
               notified[id] = false
             when 1
               docks[id] =
                 name: $ships[_ships[ndock.api_ship_id].api_ship_id].api_name
                 completeTime: ndock.api_complete_time
-                countdown: Math.floor((ndock.api_complete_time - new Date()) / 1000)
         @setState
           docks: docks
           notified: notified
@@ -67,40 +107,27 @@ NdockPanel = React.createClass
               docks[id] =
                 name: '未解锁'
                 completeTime: -1
-                countdown: -1
             when 0
               docks[id] =
                 name: '未使用'
                 completeTime: -1
-                countdown: -1
               notified[id] = false
             when 1
               docks[id] =
                 name: $ships[_ships[ndock.api_ship_id].api_ship_id].api_name
                 completeTime: ndock.api_complete_time
-                countdown: Math.floor((ndock.api_complete_time - new Date()) / 1000)
         @setState
           docks: docks
           notified: notified
-  updateCountdown: ->
-    {docks, notified} = @state
-    for i in [1..4]
-      if docks[i].countdown > 0
-        docks[i].countdown = Math.floor((docks[i].completeTime - new Date()) / 1000)
-        if docks[i].countdown <= 60 && !notified[i]
-          notify "#{docks[i].name} 修复完成",
-            type: 'repair'
-            icon: join(ROOT, 'assets', 'img', 'operation', 'repair.png')
-          notified[i] = true
+  setNotifiedHandler: (i, value)->
+    {notified} = @state
+    notified[i] = value
     @setState
-      docks: docks
       notified: notified
   componentDidMount: ->
     window.addEventListener 'game.response', @handleResponse
-    setInterval @updateCountdown, 1000
   componentWillUnmount: ->
     window.removeEventListener 'game.response', @handleResponse
-    clearInterval @updateCountdown, 1000
   render: ->
     <Panel header="入渠" bsStyle="warning">
       <Table>
@@ -111,14 +138,21 @@ NdockPanel = React.createClass
               <td>{@state.docks[i].name}</td>
               <td>
                 {
-                  if @state.docks[i].countdown > 60
-                    <OverlayTrigger placement='right' overlay={<Tooltip><strong>完成时间: </strong>{timeToString @state.docks[i].completeTime}</Tooltip>}>
-                      <Label bsStyle="primary">{resolveTime @state.docks[i].countdown}</Label>
-                    </OverlayTrigger>
-                  else if @state.docks[i].countdown > -1
-                    <Label bsStyle="success">{resolveTime @state.docks[i].countdown}</Label>
+                  countdown = Math.max 0, Math.floor((@state.docks[i].completeTime - new Date()) / 1000)
+                  if countdown > 60
+                    trigger = ['hover', 'focus']
                   else
-                    <Label bsStyle="default"></Label>
+                    trigger = []
+                  <OverlayTrigger trigger={trigger} placement='right' overlay={<Tooltip><strong>完成时间: </strong>{timeToString @state.docks[i].completeTime}</Tooltip>}>
+                    <div>
+                      <CountdownLabel
+                        dockIndex={i}
+                        completeTime={@state.docks[i].completeTime}
+                        notified={@state.notified}
+                        dockName={@state.docks[i].name}
+                        setNotifiedHandler={@setNotifiedHandler} />
+                    </div>
+                  </OverlayTrigger>
                 }
               </td>
             </tr>
