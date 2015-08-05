@@ -12,8 +12,8 @@ CountdownLabel = React.createClass
   updateCountdown: ->
     {countdown} = @state
     if countdown > 0
-      countdown = Math.floor((@props.completeTime - new Date()) / 1000)
-      if countdown <= 1 && @props.notified
+      countdown = Math.max 0, Math.floor((@props.completeTime - new Date()) / 1000)
+      if countdown <= 1 && !@props.notified
         notify "#{@props.dockName} 建造完成",
           type: 'construction'
           icon: join(ROOT, 'assets', 'img', 'operation', 'build.png')
